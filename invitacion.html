@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥂 Cumpleaños N° 62 de Marco Emilio Hurtado 🥂</title>
+    <link rel="icon" href="happy.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    
+    <style>
+        /* ESTILOS GLOBALES Y VARIABLES */
+        :root {
+            --color-primary: #3B7739;
+            --color-secondary: #FFD700;
+            --color-black: #000000;
+            --color-text: #FFFFFF;
+            --font-fancy: 'Tangerine', cursive;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: var(--color-text);
+        }
+
+        body {
+            background-color: var(--color-primary);
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        
+        #main-content {
+            display: none; 
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+            flex-direction: column; 
+            gap: 20px;
+            z-index: 50; 
+        }
+
+        /* --- ANIMACIÓN DE TRANSICIÓN 1: IMAGEN CRAZY.PNG --- */
+        #transition-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('CRAZY.PNG'); 
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1002;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #transition-image.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #intro-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1003; 
+            font-size: 2.5em;
+            color: var(--color-secondary);
+            font-family: var(--font-fancy);
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        .fade-out { opacity: 0 !important; }
+
+        /* Cortina: Estructura y Transición tipo Telón */
+        .curtain {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 50vh; 
+            background-color: var(--color-black);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: none; 
+        }
+        #curtain-top { top: 0; transform: translateY(0); }
+        #curtain-bottom { top: 50vh; transform: translateY(0); }
+        .curtain-closed-top { 
+            transition: transform 0.5s ease-in-out; /* Apertura rápida */
+            transform: translateY(-100%) !important; 
+        }
+        .curtain-closed-bottom { 
+            transition: transform 0.5s ease-in-out; /* Apertura rápida */
+            transform: translateY(100%) !important; 
+        }
+
+        /* --- ANIMACIÓN DE TRANSICIÓN 2: GLOBOS --- */
+        #balloon-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 900; 
+            overflow: hidden;
+            display: none; 
+            pointer-events: none; 
+            transition: opacity 1.0s ease-out; /* Fade out suave */
+        }
+        #balloon-container.balloon-fade-out {
+            opacity: 0;
+        }
+        .balloon {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            background-color: var(--color-primary); 
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: inset -5px -5px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0.5;
+            animation: float-up linear infinite;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotateZ(0deg) scale(0.8); opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotateZ(720deg) scale(1.2); opacity: 0; }
+        }
+        
+        /* --- ESTILOS DE LA TARJETA (Mantenidos) --- */
+        .card-container {
+            background-color: var(--color-primary);
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 10px 10px;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.1);
+            border: 2px solid var(--color-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 5px solid var(--color-secondary);
+            pointer-events: none;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5) inset, 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .age-container {
+            margin: 20px auto 30px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0) 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px var(--color-secondary);
+        }
+        .age-number {
+            font-family: var(--font-display);
+            font-size: 4em;
+            color: var(--color-text);
+            text-shadow: 0 0 10px var(--color-secondary);
+            line-height: 0.8;
+            font-weight: bold;
+        }
+        .age-text {
+            font-family: var(--font-fancy);
+            font-size: 2em;
+            color: var(--color-text);
+            text-shadow: 0 0 5px var(--color-secondary);
+        }
+        .invitation-text {
+            font-size: 1.1em;
+            margin: 20px 0 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .guest-name {
+            font-family: var(--font-fancy);
+            font-size: 3em;
+            color: var(--color-secondary);
+            margin: 0 0 20px;
+            line-height: 1;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 15px;
+        }
+        .info-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .info-box span {
+            font-size: 1.1em;
+            font-family: var(--font-display);
+            font-weight: bold;
+            color: var(--color-secondary);
+        }
+        .info-box p {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: var(--color-text);
+        }
+        .details {
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+        .confirmation-text {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+        .confirmation-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--color-secondary);
+            margin-top: 5px;
+        }
+        .action-buttons {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .action-buttons a {
+            width: 100%; 
+            padding: 12px 15px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s; 
+            font-size: 0.9em;
+            border: 2px solid var(--color-secondary);
+            background-color: transparent;
+            color: var(--color-secondary);
+        }
+        .action-buttons a:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+        .side-panel {
+            padding: 15px;
+            border-radius: 10px;
+            background-color: rgba(255, 215, 0, 0.05); 
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        #music-player {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .music-label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--color-secondary);
+        }
+        .sound-icon {
+            cursor: pointer;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .sound-icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--color-secondary);
+        }
+        .sound-icon svg {
+            fill: var(--color-primary);
+            width: 60%;
+            height: 60%;
+        }
+        #countdown-timer {
+            margin-top: 10px;
+        }
+        .timer-label {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-secondary);
+        }
+        .countdown-boxes {
+            display: flex;
+            justify-content: space-around;
+            gap: 5px;
+        }
+        .time-box {
+            background-color: rgba(255, 215, 0, 0.1);
+            padding: 10px 5px;
+            border-radius: 5px;
+            min-width: 60px;
+            flex-grow: 1;
+        }
+        .time-value {
+            font-size: 2.2em;
+            font-weight: bold;
+            line-height: 1;
+            color: var(--color-secondary);
+        }
+        .time-unit {
+            font-size: 0.8em;
+            margin-top: 5px;
+            color: var(--color-text);
+        }
+        @media (min-width: 800px) {
+            #main-content { flex-direction: row; align-items: stretch; }
+            .action-buttons { flex-direction: row; justify-content: space-around; gap: 20px; }
+            .action-buttons a { width: auto; }
+            .side-panel { flex: 1; min-height: 600px; display: flex; flex-direction: column; justify-content: center; }
+            .card-container { flex: 3; padding: 40px; min-height: 650px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="transition-image"></div>
+    <div id="balloon-container"></div>
+    <div id="curtain-top" class="curtain"></div>
+    <div id="curtain-bottom" class="curtain"></div>
+    <h1 id="intro-text">¡Te Esperamos!</h1>
+
+    <main id="main-content">
+        
+        <section class="side-panel">
+            <header id="music-player">
+                <p class="music-label">TOCA PARA</p>
+                <p class="music-label">ESCUCHAR LA CANCIÓN</p>
+                
+                <div id="youtube-player" style="display:none;"></div> 
+
+                <div class="sound-icon" id="play-pause-btn" aria-label="Reproducir o Pausar Canción">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </div>
+            </header>
+        </section>
+
+        <article class="card-container" role="region" aria-label="Tarjeta de Invitación de Cumpleaños">
+            <header>
+                <div class="age-container">
+                    <p class="age-number">62</p>
+                    <p class="age-text">Años</p>
+                </div>
+                
+                <p class="invitation-text">TE INVITO A CELEBRAR EL CUMPLEAÑOS DE</p>
+                <h2 class="guest-name">Marco Emilio Hurtado</h2>
+            </header>
+            
+            <div class="info-row">
+                <div class="info-box"> <span>SÁBADO</span> </div>
+                <div class="info-box">
+                    <span style="font-size: 2em; margin-bottom: 5px;">29</span>
+                    <p>NOVIEMBRE</p>
+                </div>
+                <div class="info-box"> <span>9:00 P.M.</span> </div>
+            </div>
+            
+            <address class="details">
+                HABRÁ PARRANDÓN <br>
+                <p>VALLENATO A LAS 10PM Y ORQUESTA TODA LA NOCHE</p>
+            </address>
+            
+            <p class="confirmation-text">CONFIRMAR ASISTENCIA:</p>
+            <p class="confirmation-number">315 0663867</p>
+
+            <div class="action-buttons">
+                <a href="https://wa.me/573150663867" 
+                    target="_blank" rel="noopener noreferrer" role="button">
+                    CONFIRMA ASISTENCIA
+                </a>
+                <a href="https://maps.app.goo.gl/DuUYLUdeYRZyGu8a6" 
+                    target="_blank" rel="noopener noreferrer" class="btn-location" role="button">
+                    VER UBICACIÓN
+                </a>
+            </div>
+        </article>
+        
+        <section class="side-panel">
+            <div id="countdown-timer">
+                <p class="timer-label">FALTAN</p>
+                <div class="countdown-boxes">
+                    <div class="time-box">
+                        <div id="days" class="time-value">00</div>
+                        <div class="time-unit">Días</div>
+                    </div>
+                    <div class="time-box">
+                        <div id="hours" class="time-value">00</div>
+                        <div class="time-unit">Horas</div>
+                    </div>
+                    <div class="time-box">
+                        <div id="minutes" class="time-value">00</div>
+                        <div class="time-unit">Minutos</div>
+                    </div>
+                    <div class="time-box">
+                        <div id="seconds" class="time-value">00</div>
+                        <div class="time-unit">Segundos</div> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // =========================================================================
+        // JAVASCRIPT: LÓGICA DE AUDIO, CONTADOR Y TRANSICIONES SECUENCIALES (ES6+)
+        // =========================================================================
+
+        // --- 1. CONTROL DE AUDIO DE YOUTUBE ---
+        let player; 
+        const VIDEO_ID = 'sMNv7C_zKl0'; // ID del video de YouTube
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = '<path d="M8 5v14l11-7z"/>'; 
+        const pauseIcon = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; 
+
+        // Función llamada automáticamente por la API de YouTube al cargar
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-player', {
+                height: '0', 
+                width: '0', 
+                videoId: VIDEO_ID,
+                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': VIDEO_ID },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            player.mute(); 
+            playPauseBtn.addEventListener('click', () => {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) {
+                    player.pauseVideo();
+                } else {
+                    player.unMute(); 
+                    player.playVideo();
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            const isPlaying = (event.data === YT.PlayerState.PLAYING);
+            playPauseBtn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${isPlaying ? pauseIcon : playIcon}</svg>`;
+        }
+
+
+        // --- 2. GENERADOR DE GLOBOS (Transición 2) ---
+        function createBalloons(count) {
+            const container = document.getElementById('balloon-container');
+            const colors = ['#FF69B4', '#ADFF2F', '#00BFFF', '#FFD700', '#9370DB']; 
+            
+            for (let i = 0; i < count; i++) {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                
+                // Propiedades aleatorias para simular muchos globos
+                const size = Math.random() * 40 + 60;
+                const duration = Math.random() * 6 + 4;
+                
+                balloon.style.width = `${size}px`;
+                balloon.style.height = `${size + 20}px`;
+                balloon.style.left = `${Math.random() * 100}vw`;
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = `${duration}s`;
+                balloon.style.animationDelay = `${-Math.random() * duration}s`;
+
+                container.appendChild(balloon);
+            }
+        }
+
+        // --- 3. LÓGICA DE CUENTA REGRESIVA (OPTIMIZADA) ---
+        function startCountdown() {
+            // Fecha del evento: Noviembre 29, 2025, 9:00 PM (GMT-5)
+            const eventDate = new Date('2025-11-29T21:00:00-05:00').getTime(); 
+            
+            if (isNaN(eventDate)) return;
+
+            const MS_PER_DAY = 86400000; // 1000 * 60 * 60 * 24
+            const MS_PER_HOUR = 3600000; // 1000 * 60 * 60
+            const MS_PER_MINUTE = 60000; // 1000 * 60
+
+            const formatTime = (value) => String(value).padStart(2, '0');
+
+            const updateCountdown = () => {
+                const distance = eventDate - new Date().getTime();
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('countdown-timer').innerHTML = '<p class="timer-label">¡CELEBRANDO!</p>';
+                    return;
+                }
+
+                document.getElementById('days').textContent = formatTime(Math.floor(distance / MS_PER_DAY));
+                document.getElementById('hours').textContent = formatTime(Math.floor((distance % MS_PER_DAY) / MS_PER_HOUR));
+                document.getElementById('minutes').textContent = formatTime(Math.floor((distance % MS_PER_HOUR) / MS_PER_MINUTE));
+                document.getElementById('seconds').textContent = formatTime(Math.floor((distance % MS_PER_MINUTE) / 1000));
+            };
+
+            updateCountdown(); 
+            const timerInterval = setInterval(updateCountdown, 1000); 
+        }
+        
+        // --- 4. CONTROLADOR DE SECUENCIA DE TRANSICIONES ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const { curtainTop, curtainBottom, transitionImage, balloonContainer, mainContent, introText } = {
+                curtainTop: document.getElementById('curtain-top'),
+                curtainBottom: document.getElementById('curtain-bottom'),
+                transitionImage: document.getElementById('transition-image'),
+                balloonContainer: document.getElementById('balloon-container'),
+                mainContent: document.getElementById('main-content'),
+                introText: document.getElementById('intro-text')
+            };
+
+            // INICIAMOS EL CONTADOR EN BACKGROUND INMEDIATAMENTE
+            startCountdown();
+            
+            // TIEMPOS DE ANIMACIÓN (en milisegundos)
+            const IMAGE_DISPLAY_DURATION = 2000; // Muestra CRAZY.PNG por 2 segundos
+            const CURTAIN_ANIMATION_DURATION = 500; // Duración del telón (0.5s)
+            const BALLOON_ANIMATION_DURATION = 1500; // Duración de subida del globo (1.5s)
+            const BALLOON_FADE_DURATION = 1000; // Duración del fade out de globos (1.0s)
+
+            // 1. Oculta la imagen y el texto después de 2.0s
+            setTimeout(() => {
+                introText.classList.add('fade-out'); 
+                transitionImage.classList.add('hidden'); 
+            }, IMAGE_DISPLAY_DURATION);
+
+            // 2. Transición 1: Abre las cortinas (0.5s)
+            setTimeout(() => {
+                curtainTop.classList.add('curtain-closed-top');
+                curtainBottom.classList.add('curtain-closed-bottom');
+            }, IMAGE_DISPLAY_DURATION + 500); // 0.5s después del inicio del fade-out de la imagen
+
+            // 3. Transición 2: Inicia los globos masivos
+            setTimeout(() => {
+                transitionImage.remove(); 
+                balloonContainer.style.display = 'block'; 
+                createBalloons(150); // 150 globos para llenar la pantalla
+            }, IMAGE_DISPLAY_DURATION + CURTAIN_ANIMATION_DURATION + 500); 
+
+            // 4. Inicia el FADE OUT SUAVE de los globos
+            const totalDuration = IMAGE_DISPLAY_DURATION + CURTAIN_ANIMATION_DURATION + BALLOON_ANIMATION_DURATION + 500;
+            
+            setTimeout(() => {
+                balloonContainer.classList.add('balloon-fade-out');
+            }, totalDuration - BALLOON_FADE_DURATION); // Se activa 1.0s antes del final
+
+            // 5. Revela el contenido principal y limpia el DOM
+            setTimeout(() => {
+                curtainTop.remove();
+                curtainBottom.remove();
+                introText.remove();
+                balloonContainer.remove();
+
+                // El contador está corriendo, se revela instantáneamente:
+                mainContent.style.display = 'flex'; 
+            }, totalDuration);
+        });
+    </script>
+</body>
+</html>
