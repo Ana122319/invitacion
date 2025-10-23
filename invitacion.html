@@ -504,34 +504,37 @@
 
         // --- 3. LÓGICA DE CUENTA REGRESIVA (OPTIMIZADA) ---
         function startCountdown() {
-            // Fecha del evento: Noviembre 29, 2025, 9:00 PM (GMT-5)
-            const eventDate = new Date('2025-11-29T21:00:00-05:00').getTime(); 
-            
-            if (isNaN(eventDate)) return;
-
-            const MS_PER_DAY = 86400000; 
-            const MS_PER_HOUR = 3600000; 
-            const MS_PER_MINUTE = 60000; 
-
-            const formatTime = (value) => String(value).padStart(2, '0');
-
-            const updateCountdown = () => {
-                const distance = eventDate - new Date().getTime();
-
-                if (distance < 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('countdown-timer').innerHTML = '<p class="timer-label">¡CELEBRANDO!</p>';
-                    return;
-                }
-
-                document.getElementById('days').textContent = formatTime(Math.floor(distance / MS_PER_DAY));
-                document.getElementById('hours').textContent = formatTime(Math.floor((distance % MS_PER_DAY) / MS_PER_HOUR));
-                document.getElementById('minutes').textContent = formatTime(Math.floor((distance % MS_PER_HOUR) / MS_PER_MINUTE));
-                document.getElementById('seconds').textContent = formatTime(Math.floor((distance % MS_PER_MINUTE) / 1000));
-            };
-
-            updateCountdown(); 
-            const timerInterval = setInterval(updateCountdown, 1000); 
+        const eventDate = new Date(2025, 10, 29, 21, 0, 0).getTime();
+    
+        const MS_PER_DAY = 86400000; 
+        const MS_PER_HOUR = 3600000; 
+        const MS_PER_MINUTE = 60000; 
+    
+        const formatTime = (value) => String(value).padStart(2, '0');
+    
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+    
+            if (distance < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('countdown-timer').innerHTML = '<p class="timer-label">¡CELEBRANDO!</p>';
+                return;
+            }
+    
+            const days = Math.floor(distance / MS_PER_DAY);
+            const hours = Math.floor((distance % MS_PER_DAY) / MS_PER_HOUR);
+            const minutes = Math.floor((distance % MS_PER_HOUR) / MS_PER_MINUTE);
+            const seconds = Math.floor((distance % MS_PER_MINUTE) / 1000);
+    
+            document.getElementById('days').textContent = formatTime(days);
+            document.getElementById('hours').textContent = formatTime(hours);
+            document.getElementById('minutes').textContent = formatTime(minutes);
+            document.getElementById('seconds').textContent = formatTime(seconds);
+        };
+    
+        updateCountdown();
+        const timerInterval = setInterval(updateCountdown, 1000);
         }
         
         // --- 4. CONTROLADOR DE SECUENCIA DE TRANSICIONES ---
@@ -594,4 +597,5 @@
     </script>
 </body>
 </html>
+
 
