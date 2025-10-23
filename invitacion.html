@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitacion Marco Emilio</title>
+    <title>Cumpleaños Marco Emilio</title>
     <link rel="icon" href="happy.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script async src="https://www.youtube.com/iframe_api"></script>
@@ -55,12 +55,15 @@
             width: 100vw;
             height: 100vh;
             background-image: url('CRAZY.png'); 
-            background-size: cover; 
+            /* CORRECCIÓN RESPONSIVA: Usar contain para ver la imagen completa sin recorte */
+            background-size: contain; 
             background-repeat: no-repeat;
             background-position: center;
             z-index: 1002;
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
+            /* Asegurar el fondo para el modo contain */
+            background-color: var(--color-black);
         }
         #transition-image.hidden {
             opacity: 0;
@@ -96,11 +99,11 @@
         #curtain-top { top: 0; transform: translateY(0); }
         #curtain-bottom { top: 50vh; transform: translateY(0); }
         .curtain-closed-top { 
-            transition: transform 0.5s ease-in-out; /* Apertura rápida */
+            transition: transform 0.5s ease-in-out; 
             transform: translateY(-100%) !important; 
         }
         .curtain-closed-bottom { 
-            transition: transform 0.5s ease-in-out; /* Apertura rápida */
+            transition: transform 0.5s ease-in-out; 
             transform: translateY(100%) !important; 
         }
 
@@ -115,7 +118,7 @@
             overflow: hidden;
             display: none; 
             pointer-events: none; 
-            transition: opacity 1.0s ease-out; /* Fade out suave */
+            transition: opacity 1.0s ease-out; 
         }
         #balloon-container.balloon-fade-out {
             opacity: 0;
@@ -135,7 +138,7 @@
             100% { transform: translateY(-100vh) rotateZ(720deg) scale(1.2); opacity: 0; }
         }
         
-        /* --- ESTILOS DE LA TARJETA (Mantenidos) --- */
+        /* --- ESTILOS DE LA TARJETA --- */
         .card-container {
             background-color: var(--color-primary);
             background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
@@ -333,6 +336,7 @@
             margin-top: 5px;
             color: var(--color-text);
         }
+        /* Media Query para pantallas más grandes (Tablets / Desktop) */
         @media (min-width: 800px) {
             #main-content { flex-direction: row; align-items: stretch; }
             .action-buttons { flex-direction: row; justify-content: space-around; gap: 20px; }
@@ -440,7 +444,7 @@
 
         // --- 1. CONTROL DE AUDIO DE YOUTUBE ---
         let player; 
-        const VIDEO_ID = 'sMNv7C_zKl0'; // ID del video de YouTube
+        const VIDEO_ID = 'sMNv7C_zKl0'; 
         const playPauseBtn = document.getElementById('play-pause-btn');
         const playIcon = '<path d="M8 5v14l11-7z"/>'; 
         const pauseIcon = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; 
@@ -484,7 +488,6 @@
                 const balloon = document.createElement('div');
                 balloon.classList.add('balloon');
                 
-                // Propiedades aleatorias para simular muchos globos
                 const size = Math.random() * 40 + 60;
                 const duration = Math.random() * 6 + 4;
                 
@@ -506,9 +509,9 @@
             
             if (isNaN(eventDate)) return;
 
-            const MS_PER_DAY = 86400000; // 1000 * 60 * 60 * 24
-            const MS_PER_HOUR = 3600000; // 1000 * 60 * 60
-            const MS_PER_MINUTE = 60000; // 1000 * 60
+            const MS_PER_DAY = 86400000; 
+            const MS_PER_HOUR = 3600000; 
+            const MS_PER_MINUTE = 60000; 
 
             const formatTime = (value) => String(value).padStart(2, '0');
 
@@ -546,10 +549,10 @@
             startCountdown();
             
             // TIEMPOS DE ANIMACIÓN (en milisegundos)
-            const IMAGE_DISPLAY_DURATION = 2000; // Muestra CRAZY.PNG por 2 segundos
-            const CURTAIN_ANIMATION_DURATION = 500; // Duración del telón (0.5s)
-            const BALLOON_ANIMATION_DURATION = 1500; // Duración de subida del globo (1.5s)
-            const BALLOON_FADE_DURATION = 1000; // Duración del fade out de globos (1.0s)
+            const IMAGE_DISPLAY_DURATION = 2000; 
+            const CURTAIN_ANIMATION_DURATION = 500; 
+            const BALLOON_ANIMATION_DURATION = 2500; 
+            const BALLOON_FADE_DURATION = 1500; 
 
             // 1. Oculta la imagen y el texto después de 2.0s
             setTimeout(() => {
@@ -561,13 +564,13 @@
             setTimeout(() => {
                 curtainTop.classList.add('curtain-closed-top');
                 curtainBottom.classList.add('curtain-closed-bottom');
-            }, IMAGE_DISPLAY_DURATION + 500); // 0.5s después del inicio del fade-out de la imagen
+            }, IMAGE_DISPLAY_DURATION + 500); 
 
             // 3. Transición 2: Inicia los globos masivos
             setTimeout(() => {
                 transitionImage.remove(); 
                 balloonContainer.style.display = 'block'; 
-                createBalloons(150); // 150 globos para llenar la pantalla
+                createBalloons(150); 
             }, IMAGE_DISPLAY_DURATION + CURTAIN_ANIMATION_DURATION + 500); 
 
             // 4. Inicia el FADE OUT SUAVE de los globos
@@ -575,7 +578,7 @@
             
             setTimeout(() => {
                 balloonContainer.classList.add('balloon-fade-out');
-            }, totalDuration - BALLOON_FADE_DURATION); // Se activa 1.0s antes del final
+            }, totalDuration - BALLOON_FADE_DURATION); 
 
             // 5. Revela el contenido principal y limpia el DOM
             setTimeout(() => {
@@ -584,12 +587,10 @@
                 introText.remove();
                 balloonContainer.remove();
 
-                // El contador está corriendo, se revela instantáneamente:
+                // REVELACIÓN INSTANTÁNEA DEL CONTENIDO FINAL
                 mainContent.style.display = 'flex'; 
             }, totalDuration);
         });
     </script>
 </body>
 </html>
-
-
