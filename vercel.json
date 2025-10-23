@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/invitacion.html"
+    }
+  ],
+  "installCommand": "echo 'Skipping install step'",
+  "buildCommand": "echo 'No build step required'"
+}
